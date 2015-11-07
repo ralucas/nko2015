@@ -2,10 +2,8 @@
 
 angular.module('nodedenverApp')
   .service('notification', function ($window, $q) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-    var _this = that;
 
-    _.extend(_this, {
+    return {
     
       getNotification: function getNotification() {
         return Notification || $window.Notification;
@@ -24,8 +22,8 @@ angular.module('nodedenverApp')
        **/ 
       requestPermission: function requestPermission() {
         var deferred = $q.defer();
-        if (_this.hasNotificationApi()) {
-          _this.getNotification().requestPermission(function(permission) {
+        if (this.hasNotificationApi()) {
+          this.getNotification().requestPermission(function(permission) {
             if (permission === 'granted') {
               deferred.resolve();
             } else {
@@ -36,5 +34,5 @@ angular.module('nodedenverApp')
         return deferred.promise;
       }
 
-    });
+    };
   });

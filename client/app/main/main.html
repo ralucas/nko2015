@@ -2,9 +2,8 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1></h1>
-    <p class="lead">Testing</p>
-    <!--<img src="assets/images/yeoman.png" alt="I'm Yeoman">-->
+    <h1>Welcome to {{restaurant.name}}</h1>
+    <img ng-src="{{restaurant.imageUrl}}" alt="{{restaurant.name}} logo">
   </div>
 </header>
 
@@ -12,9 +11,12 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header"></h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+      <div class="register-button-container">
+        <p class="lead">Current wait time is: 
+          <span class="wait-time" ng-bind="getCurrentWaitTime() | date: 'mm:ss'"></span>
+        </p>
+        <button class="btn btn-primary btn-lg" ng-click="showModal()">Put me on the list!</button>
+      </div>
     </div>
   </div>
 </div>
