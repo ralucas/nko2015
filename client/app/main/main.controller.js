@@ -3,9 +3,10 @@
 angular.module('nodedenverApp')
   .controller('MainCtrl', function ($scope, $http, geolocation, restClient) {
 
-    geolocation.getCurrentLocation(function(pos) {
-      console.log(pos);
-    });
+    geolocation.getCurrentLocation()
+      .then(function(position) {
+        console.log(position);
+      });
 
     //$http.get('/api/things').success(function(awesomeThings) {
       //$scope.awesomeThings = awesomeThings;
