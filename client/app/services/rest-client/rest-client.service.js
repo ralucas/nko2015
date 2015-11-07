@@ -2,15 +2,13 @@
 
 angular.module('nodedenverApp')
   .service('restClient', function ($http, $resource) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-    var _this = this;
 
-    _.extend(_this, {
+    return {
     
-      setLocation: function(coords) {
-        return $resource('/location/:coords'); 
+      location: function location(coords) {
+        return $resource('/api/location/:coords', coords); 
       }
     
-    });
+    };
 
   });

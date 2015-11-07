@@ -14,6 +14,7 @@ angular.module('nodedenverApp')
       modalClass = modalClass || 'modal-default';
 
       angular.extend(modalScope, scope);
+      console.log(modalScope);
 
       return $modal.open({
         templateUrl: 'components/modal/modal.html',
@@ -24,6 +25,30 @@ angular.module('nodedenverApp')
 
     // Public API here
     return {
+
+      openRegistration: function openRegistration() {
+          var registrationModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Register',
+              html: '<register></register>',
+              buttons: [{
+                classes: 'btn-primary',
+                text: 'Register',
+                click: function(e) {
+                  registrationModal.close(e);
+                }
+              }, {
+                classes: 'btn-default',
+                text: 'Cancel',
+                click: function(e) {
+                  registrationModal.dismiss(e);
+                }
+              }]
+            }
+          });
+          return registrationModal;
+      },
 
       /* Confirmation modals */
       confirm: {

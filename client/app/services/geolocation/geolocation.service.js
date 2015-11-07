@@ -3,24 +3,22 @@
 angular.module('nodedenverApp')
   .service('geolocation', function ($window, $q) {
 
-    var _this = this;
+    return {
 
-    _.extend(_this, {
-
-      getNavigator: function() {
+      getNavigator: function getNavigator() {
         return navigator || $window.navigator;
       },
 
-      hasGeolocation: function() {
-        return 'geolocation' in _this.getNavigator();
+      hasGeolocation: function hasGeolocation() {
+        return 'geolocation' in this.getNavigator();
       },
 
       /**
        * @param {object} options
        * @return {object} promise
        **/ 
-      getCurrentLocation: function(options) {
-        var navigator = _this.getNavigator();
+      getCurrentLocation: function getCurrentLocation(options) {
+        var navigator = this.getNavigator();
         var deferred = $q.defer();
         navigator.geolocation
           .getCurrentPosition(function(position) {
@@ -31,11 +29,23 @@ angular.module('nodedenverApp')
         return deferred.promise;
       },
 
-      watchCurrentLocation: function() {
-      
+      /**
+       * @param {object} options
+       * @return {object} promise
+       **/ 
+      watchCurrentLocation: function watchCurrentLocation(options) {
+        var navigator = this.getNavigator();
+        var deferred = $q.defer();
+        navigator.geolocation
+          .watchCurrentPositiont(function(position) {
+            deferred.resolve(position); 
+          }, function(error) {
+            deferred.reject(error);
+          }, options); 
+        return deferred.promise;
       }
 
-    });
+    };
 
   })
   ;

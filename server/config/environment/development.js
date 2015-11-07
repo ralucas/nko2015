@@ -8,5 +8,17 @@ module.exports = {
     uri: 'mongodb://localhost/nodedenver-dev'
   },
 
+  mysql: {
+  
+  },
+
+  redis: {
+
+  },
+
+  yelp: {
+  
+  },
+
   seedDB: true
 };
