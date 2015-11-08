@@ -5,6 +5,7 @@ angular.module('nodedenverApp')
     return {
       templateUrl: 'app/directives/register/register.html',
       restrict: 'EA',
+      controller: 'RegisterCtrl',
       link: function link(scope, element, attrs, ctrl) {
 
         scope.customer = scope.customer || {};
