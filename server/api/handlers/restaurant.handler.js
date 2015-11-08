@@ -26,7 +26,7 @@ RestaurantHandler.prototype.getWaitlist = function get(req, res) {
   console.log('rq', req.query);
   managers.restaurantManager.getWaitlist(req.query)
     .then(function(response) {
-      res.status(200).send(response);
+      res.status(200).json(response);
     })
     .catch(function(error) {
       console.error(error);

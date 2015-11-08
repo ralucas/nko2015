@@ -20,14 +20,22 @@ angular.module('nodedenverApp')
       // And report it to the admin side
     };
 
+   $scope.getCurrentWaitTime = function() {
+     return $scope.waitTime + ' minutes';
+   };
+
     angular.extend(_this, {
 
       initialize: function initialize() {
         _this.getPosition()
           .then(function(data) {
-            return data.data.businesses[0];
+            console.log(data);
+            return data.data;
           })
-          .then(function(restaurant) {
+          .then(function(response) {
+            console.log(response);
+            var restaurant = response.restaurant;
+            $scope.waitTime = response.waitTime; 
             $scope.restaurant = _.pick(restaurant, 'name', 'id', 'image_url');
           });
       },

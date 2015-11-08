@@ -14,7 +14,7 @@
       <div class="register-button-container">
         <p ng-if="isRegistered" class="lead">Party of {{customer.partySize}} for {{customer.lastName}} is waiting</p>
         <p class="lead">Current wait time is: 
-          <span class="wait-time" ng-bind="getCurrentWaitTime() | date: 'mm:ss'"></span>
+          <span class="wait-time" ng-bind="getCurrentWaitTime()"></span>
         </p>
         <button ng-if="!isRegistered" class="btn btn-primary btn-lg" ng-click="showRegistration()">Put me on the list!</button>
         <button ng-if="isRegistered" class="btn btn-danger btn-lg" ng-click="cancelRegistration(customer)">Cancel Table</button>

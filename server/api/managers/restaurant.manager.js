@@ -1,4 +1,5 @@
 var services = require('../services');
+var helpers = require('../helpers');
 var _ = require('lodash');
 
 function RestaurantManager() {}
@@ -12,9 +13,14 @@ RestaurantManager.prototype.save = function(reservation) {
 }
 
 RestaurantManager.prototype.getWaitlist = function getByLocation(restaurant) {
+  var waitlistQty = restaurant.waiting;
   return services.mongoService.findById(restaurant.id, 'Reservation')
     .then(function(restaurantData) {
-      return restaurantData.waitlist;
+      var waitTime = helpers.determineWaitTime(restaurantData.waitlist.length);
+      return {
+        waitlist: restaurantData.waitlist,
+        waitTime: waitTime
+      };
     });
 };
 
