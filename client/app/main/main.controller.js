@@ -8,19 +8,16 @@ angular.module('nodedenverApp')
       Modal.openRegistration();
     };
 
-    //Mock data
-    $scope.restaurant = {
-      name: 'Test Restaurant',
-      imageUrl: 'http://www.mcdonalds.com/etc/designs/mcdonalds/en/_jcr_content/genericpage/genericpagecontent/sitelevelconfiguration/logoimage.img.png'
-    };
-
     angular.extend(_this, {
 
       initialize: function initialize() {
         _this.getPosition()
           .then(function(data) {
             console.log('received', data);
-            return data;
+            return data.data.businesses[0];
+          })
+          .then(function(restaurant) {
+            $scope.restaurant = _.pick(restaurant, 'name', 'id', 'image_url');
           });
       },
 
