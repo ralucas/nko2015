@@ -1,13 +1,16 @@
 <div class="container">
-  <form name="registration" class="form-horizontal">
-    <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <input ng-model="customer.lastName" name="lastName" type="text" placeholder="Type your last name..."/>
-    </div>
-    <div class="form-group">
-      <label for="partySize">Party Size:</label>
-      <input ng-model="customer.partySize" name="partySize" type="number" />
-    </div>
-    <button type="submit" class="btn btn-default btn-large" ng-click="registerCustomer(customer)">Submit</button>
-  </form>
+  <div class="row">
+    <form name="registration" class="form-horizontal">
+      <h1>Enter your party name and size:</h1>
+      <div class="form-group">
+        <input class="form-control" ng-model="customer.partyName" name="partyName" type="text" placeholder="Party name..." />
+      </div>
+      <div class="form-group">
+        <input class="form-control" ng-model="customer.partySize" name="partySize" type="number" placeholder="Party size..."/>
+      </div>
+      <div class="submit-button-container">
+        <button type="submit" class="btn btn-success btn-large" ng-click="registerCustomer(customer)">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>
