@@ -17,4 +17,6 @@ router.get('/location', api.handlers.locationHandler.get);
 
 router.put('/restaurant', api.handlers.restaurantHandler.put);
 
+router.get('/restaurant/waitlist', api.handlers.restaurantHandler.getWaitlist);
+
 module.exports = router;

@@ -31,8 +31,6 @@ function MongoService(config) {
  */
 MongoService.prototype.add = function(data, model, callback) {
 
-  console.log('MongoService.add executed');
-
   // Let's create an instance of the model
   var model = new Models[model](data);
   
@@ -45,11 +43,9 @@ MongoService.prototype.add = function(data, model, callback) {
 };
 
 MongoService.prototype.updateOrAdd = function updateOrAdd(data, model) {
-  console.log(data);
 
   return Q.npost(Models[model], 'findById', [data._id])
     .then(function(instance) {
-      console.log('inst', instance);
       if (instance) {
         instance.waitlist.push(data.waitlist);
         return Q.nfcall(instance.save);
@@ -67,6 +63,11 @@ MongoService.prototype.show = function(model, callback) {
       if (err) return callback(err);
       return callback(null, results);
     });
+};
+
+MongoService.prototype.findById = function(id, model) {
+  console.log(id, model, Models[model]);
+  return Q.npost(Models[model], 'findById', [id]); 
 };
 
 MongoService.prototype.clearAll = function(callback){

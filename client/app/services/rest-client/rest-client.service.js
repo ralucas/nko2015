@@ -27,6 +27,14 @@ angular.module('nodedenverApp')
             url: apiRoot + 'restaurant',
             data: reservation
           });
+        },
+        getWaitlist: function get(id) {
+          var url = apiRoot + 'restaurant/waitlist?id=' + id;
+          return $http({
+            method: 'GET',
+            url: url,
+            cache: false 
+          });
         }
       }
     };

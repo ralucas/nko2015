@@ -11,6 +11,11 @@ RestaurantManager.prototype.save = function(reservation) {
   return services.mongoService.updateOrAdd(reservation, 'Reservation');
 }
 
-
+RestaurantManager.prototype.getWaitlist = function getByLocation(restaurant) {
+  return services.mongoService.findById(restaurant.id, 'Reservation')
+    .then(function(restaurantData) {
+      return restaurantData.waitlist;
+    });
+};
 
 module.exports = RestaurantManager;
