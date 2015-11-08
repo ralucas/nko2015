@@ -31,6 +31,7 @@ angular.module('nodedenverApp')
             modal: {
               dismissable: true,
               title: 'Register',
+              registration: true,
               html: '<register></register>',
               buttons: [{
                 classes: 'btn-primary',
