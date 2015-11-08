@@ -15,4 +15,6 @@ router.get('/', function(req, res) {
 
 router.get('/location', api.handlers.locationHandler.get);
 
+router.put('/restaurant', api.handlers.restaurantHandler.put);
+
 module.exports = router;
