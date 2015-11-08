@@ -7,7 +7,7 @@
 
   <div ng-if="modal.html" ng-bind-html="modal.html"></div>
   <div ng-if="modal.registration">
-    <div class="container">
+    <div class="container" ng-model="modal.registered">
       <div class="form-group">
         <label for="lastName">Last Name:</label>
         <input name="lastName" type="text" placeholder="Type your last name..."/>

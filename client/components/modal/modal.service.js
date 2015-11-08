@@ -33,6 +33,7 @@ angular.module('nodedenverApp')
               title: 'Register',
               registration: true,
               html: '<register></register>',
+              self: this,
               buttons: [{
                 classes: 'btn-primary',
                 text: 'Register',
@@ -48,7 +49,9 @@ angular.module('nodedenverApp')
               }]
             }
           });
-          return registrationModal;
+          registrationModal.result.then(function(a,b) {
+            console.log(a,b);
+          });
       },
 
       /* Confirmation modals */

@@ -15,8 +15,18 @@ angular.module('nodedenverApp')
           return $http({
             method: 'GET',
             url: url,
-            cache: false 
+            cache: true 
           }); 
+        }
+      },
+
+      restaurant: {
+        put: function put(reservation) {
+          return $http({
+            method: 'PUT',
+            url: apiRoot + 'restaurant',
+            data: reservation
+          });
         }
       }
     };

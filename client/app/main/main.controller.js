@@ -8,12 +8,23 @@ angular.module('nodedenverApp')
       Modal.openRegistration();
     };
 
+    $scope.showRegistration = function showRegistration() {
+      if (! $scope.inRegistration) {
+        $scope.inRegistration = true; 
+      }
+    };
+
+    $scope.cancelRegistration = function cancelRegistration() {
+      $scope.inRegistration = false;
+      // Send cancellation to backend
+      // And report it to the admin side
+    };
+
     angular.extend(_this, {
 
       initialize: function initialize() {
         _this.getPosition()
           .then(function(data) {
-            console.log('received', data);
             return data.data.businesses[0];
           })
           .then(function(restaurant) {
@@ -24,8 +35,6 @@ angular.module('nodedenverApp')
       getPosition: function getPosition() {
         return geolocation.getCurrentLocation({enableHighAccuracy: true})
           .then(function(position) {
-            console.log('position:', position);
-            console.log(restClient);
             return restClient.location.get(position.coords);
         });
       }
