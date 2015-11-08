@@ -21,7 +21,13 @@ function YelpService(config) {
 
 YelpService.prototype.searchByLocation = function searchByLocation(lat, long) {
   var latlong = lat + ', ' + long;
-  return Q.ninvoke(this.client, 'search', {ll: latlong});
+  console.log(this.client, latlong);
+  var deferred = Q.defer();
+  this.client.search({term: 'restaurants', ll: latlong}, function(error, data) {
+    if (error) deferred.reject(error);
+    deferred.resolve(data);
+  });
+  return deferred.promise;
 };
 
 module.exports = YelpService;
