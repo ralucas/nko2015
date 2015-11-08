@@ -43,7 +43,6 @@ angular.module('nodedenverApp')
 
         _this.getPosition()
           .then(function(data) {
-            console.log(data);
             return data.data;
           })
           .then(function(response) {

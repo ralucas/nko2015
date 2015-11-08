@@ -11,7 +11,8 @@ Helpers.prototype.getWaitTime = function(restaurant) {
   var _this = this;
   return services.mongoService.findById(restaurant.id, 'Reservation')
     .then(function(data) {
-      return _this.determineWaitTime(data.waitlist.length);      
+      var numberWaiting = data && data.waitlist ? data.waitlist.length : 0;
+      return _this.determineWaitTime(numberWaiting);      
     });   
 };
 

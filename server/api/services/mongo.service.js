@@ -11,7 +11,7 @@ function MongoService(config) {
 
   _.defaults(this.config, {
     dbName: 'nodedenver',
-    host: 'localhost'
+    host: process.env.MONGO_URL || 'localhost'
   });
 
   var dbUrl = 'mongodb://' + this.config.host + '/' + this.config.dbName;

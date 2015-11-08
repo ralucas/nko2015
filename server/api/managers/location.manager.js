@@ -11,7 +11,6 @@ LocationManager.prototype.getLocation = function(coords, radius) {
   var yelpPrm = services.yelpService.searchByLocation(coords.latitude, coords.longitude, radius);
   
   return yelpPrm.then(function(response) {
-  	console.log(response);
   	if (response.businesses.length > 0) {
   	  return response;
  	} else {
