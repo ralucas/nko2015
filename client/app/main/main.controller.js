@@ -25,11 +25,11 @@ angular.module('nodedenverApp')
       },
 
       getPosition: function getPosition() {
-        return geolocation.getCurrentLocation()
+        return geolocation.getCurrentLocation({enableHighAccuracy: true})
           .then(function(position) {
             console.log('position:', position);
             console.log(restClient);
-            return restClient.location(position.coords);
+            return restClient.location.get(position.coords);
         });
       }
     });

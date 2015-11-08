@@ -9,6 +9,10 @@ var api = {
   services: require('./services')
 };
 
+router.get('/', function(req, res) {
+  res.send('Api is up');
+});
+
 router.get('/location', api.handlers.locationHandler.get);
 
 module.exports = router;
