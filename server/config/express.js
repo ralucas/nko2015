@@ -32,6 +32,14 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', path.join(config.root, 'public'));
     app.use(morgan('dev'));
+    app.use (function (req, res, next) {
+      var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+      if (schema === 'https') {
+        next();
+      } else {
+        res.redirect('https://' + req.headers.host + req.url);
+      }
+    });
   }
 
   if ('development' === env || 'test' === env) {

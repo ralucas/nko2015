@@ -10,12 +10,10 @@ function MongoService(config) {
   this.config = config || {};
 
   _.defaults(this.config, {
-    dbName: 'nodedenver',
-    host: process.env.MONGO_URL || 'localhost'
+    host: process.env.MONGO_URL || 'mongodb://localhost/nodedenver'
   });
 
-  var dbUrl = 'mongodb://' + this.config.host + '/' + this.config.dbName;
-  console.log('dbUrl: ', dbUrl);
+  var dbUrl = this.config.host;
 
   var dbEvents = ['error', 'connecting', 'connected', 'open', 'disconnecting', 'disconnected', 'close', 'reconnected', 'fullsetup'];
   dbEvents.forEach(function(evt) {
@@ -30,16 +28,17 @@ function MongoService(config) {
  * param - model -- name of model setup in models -- {string}
  */
 MongoService.prototype.add = function(data, model, callback) {
-
+  var deferred = Q.defer();
   // Let's create an instance of the model
-  var model = new Models[model](data);
+  var modelInstance = new Models[model](data);
   
-  model.save(function(err, res) {
+  modelInstance.save(function(err, res) {
     if (err) {
-      return callback(err, null);
+      return deferred.reject(err);
     }
-    return callback(null, 'Success');
+    return deferred.resolve(res);
   });
+  return deferred.promise
 };
 
 MongoService.prototype.updateOrAdd = function updateOrAdd(data, model) {

@@ -6,7 +6,8 @@ angular.module('nodedenverApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ui.grid'
+  'ui.grid',
+  'ui.grid.selection'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

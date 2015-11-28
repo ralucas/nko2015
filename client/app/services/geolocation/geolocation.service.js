@@ -22,7 +22,6 @@ angular.module('nodedenverApp')
         var deferred = $q.defer();
         navigator.geolocation
           .getCurrentPosition(function(position) {
-            console.log(position);
             deferred.resolve(position); 
           }, function(error) {
             deferred.reject(error);

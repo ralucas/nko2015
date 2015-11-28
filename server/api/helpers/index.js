@@ -17,6 +17,7 @@ Helpers.prototype.getWaitTime = function(restaurant) {
 };
 
 Helpers.prototype.determineWaitTime = function determineWaitTime(numberWaiting) {
+  numberWaiting = numberWaiting || 0;
   var waitTime = numberWaiting * AVG_WAIT_TIME;
   return waitTime; 
 };

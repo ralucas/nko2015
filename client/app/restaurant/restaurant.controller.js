@@ -31,6 +31,14 @@ angular.module('nodedenverApp')
      return $scope.waitTime + ' minutes';
    };
 
+   $scope.$watch('gridApi', function(nv, ov) {
+     if (nv) {
+      $scope.gridApi.selection.on.rowSelectionChanged($scope,function(row, e){
+        console.log(row, e); 
+      }); 
+     }
+   })
+
     angular.extend(_this, {
 
       initialize: function initialize() {
@@ -38,8 +46,14 @@ angular.module('nodedenverApp')
         $scope.gridOpts = {
           enableSorting: true,
           enableFiltering: true,
-          columnDefs: columnDefs
+          columnDefs: columnDefs,
+          enableRowSelection: true,
+          enableSelectAll: true,
+          multiSelect: true,
+          enableFullRowSelection: true,
+          enableRowHeaderSelection: false
         };
+
 
         _this.getPosition()
           .then(function(data) {
@@ -52,16 +66,21 @@ angular.module('nodedenverApp')
             return response.restaurant;
           })
           .then(function(restaurant) {
-            console.log($location);
             //$location.url() += '?id=' + restaurant.id;
             var waiting = $scope.waitlist ? $scope.waitlist.length : null;
             return restClient.restaurant.getWaitlist(restaurant.id, waiting);
           })
           .then(function(waitlist) {
-            console.log(waitlist.data);
-            $scope.waitlist = waitlist.data.waitlist;
+            $scope.waitlist = waitlist.data.waitlist.map(function(customer) {
+              customer.time = moment(customer.time).format('MMMM Do YYYY, h:mm:ss a');
+              return customer;
+            });
             $scope.waitTime = waitlist.data.waitTime;
             $scope.gridOpts.data = waitlist.data.waitlist;
+            $scope.gridOpts.onRegisterApi = function(gridApi){
+              //set gridApi on scope
+              $scope.gridApi = gridApi;
+            };
           })
           .catch(function(error) {
             $scope.error = error;

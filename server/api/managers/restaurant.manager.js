@@ -16,6 +16,17 @@ RestaurantManager.prototype.getWaitlist = function getByLocation(restaurant) {
   var waitlistQty = restaurant.waiting;
   return services.mongoService.findById(restaurant.id, 'Reservation')
     .then(function(restaurantData) {
+      if (!restaurantData) {
+        var rest = _.pluck(restaurant, 'id', 'image_url', 'name')
+        rest._id = restaurant.id;
+        return services.mongoService.add(rest, 'Reservation')
+          .then(function(data) {
+            return {
+              waitlist: [],
+              waitTime: 0
+            };
+          });
+      }
       var waitTime = helpers.determineWaitTime(restaurantData.waitlist.length);
       return {
         waitlist: restaurantData.waitlist,
