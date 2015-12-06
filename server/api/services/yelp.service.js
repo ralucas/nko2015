@@ -19,8 +19,14 @@ function YelpService(config) {
   }
 }
 
-
-
+/**
+ * Searches Yelp for restaurants given lat and long
+ * @param {float} lat - Latitude
+ * @param {float} long - Longitude
+ * @param {int} radius - Radius for the search
+ *
+ * @return {object} promise - Promise returns array of restaurants
+ **/ 
 YelpService.prototype.searchByLocation = function searchByLocation(lat, long, radius) {
   var latlong = lat + ', ' + long;
   var deferred = Q.defer();
